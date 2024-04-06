@@ -16,11 +16,9 @@ ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue") 
   
 app = ctk.CTk() 
-
 app.geometry("400x500") 
-
 app.title("Modern Login UI using Customtkinter") 
-my_entries = []
+
 
 
 
@@ -96,8 +94,8 @@ user_pass_rep.pack(pady=12,padx=10)
 button = ctk.CTkButton(master=frame,text='Login',command=login) 
 button.pack(pady=12,padx=10) 
 
-button = ctk.CTkButton(master=frame,text='Signup',command=signup)
-button.pack(pady=12,padx=10) 
+button_sign = ctk.CTkButton(master=frame,text='Signup',command=signup)
+button_sign.pack(pady=12,padx=10) 
   
 checkbox = ctk.CTkCheckBox(master=frame,text='Remember Me') 
 checkbox.pack(pady=12,padx=10) 
