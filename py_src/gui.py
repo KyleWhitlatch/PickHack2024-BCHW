@@ -17,7 +17,7 @@ my_entries = []
 
 
 def signup():
-    is_valid = user_entry.get()
+    is_valid = validate_email(user_entry.get())
     new_window = ctk.CTkToplevel(app) 
   
     new_window.title("Successfully made account") 
@@ -46,7 +46,7 @@ def login():
     if user_entry.get() == username and user_pass.get() == password: 
         
         ctk.CTkLabel(new_window,text="YOU JUST LOST THE GAME!!").pack() 
-    elif is_valid and user_pass.get() != password: 
+    elif is_valid and user_pass.get() != password and username == user_entry.get(): 
         tkmb.showwarning(title='Wrong password',message='Please check your password') 
     elif (not is_valid) and user_pass.get() == password: 
         tkmb.showwarning(title='Wrong username',message='Please check your username') 
