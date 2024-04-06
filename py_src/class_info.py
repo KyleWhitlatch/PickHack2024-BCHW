@@ -237,6 +237,10 @@ class info:
             
     ############################################################################################################
     
+    ### Password Hash ###
+    def set_pw_hash(self, pw):
+        self.PWhash = pw
+    
     ### COMPUTE HASH ###
     def hash_string_gen(self):
         self.full_using_vars.append(self.PWhash)
