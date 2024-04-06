@@ -237,11 +237,13 @@ class info:
     
     ### COMPUTE HASH ###
     def hash_string_gen(self):
-        pass
-    
+        hash_str = "".join(x for x in self.full_using_vars)
+        hash_str = hash_str.replace('_', '')
+        hash_str = hash_str.replace('.', '')
+        return hash_str
     
     def hash_with_keccak(self):
-        return Web3.solidity_keccak(['string'], ['1234']).hex()
+        return Web3.solidity_keccak(['string'], [str(self.hash_string_gen())]).hex()
     
     def hash_cpu_information(self):
         cpu_info_string = ' '.join(self.full_cpu_information)
