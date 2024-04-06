@@ -1,9 +1,12 @@
 import hashlib
+from validate_email import validate_email
 def signup():
     email = input("Enter email address: ")
+    is_valid = validate_email(email)
     pwd = input("Enter password: ")
     conf_pwd = input("Confirm password: ")
-    if conf_pwd == pwd:
+    
+    if conf_pwd == pwd and is_valid:
         enc = conf_pwd.encode()
         hash1 = hashlib.md5(enc).hexdigest()
         with open("credentials.txt", "w") as f:
@@ -12,16 +15,17 @@ def signup():
         f.close()
         print("You have registered successfully!")
     else:
-        print("Password is not same as above! \n")
+        print("Password is not same as above! or email is invalid\n")
 def login():
     email = input("Enter email: ")
+    is_valid = validate_email(email)
     pwd = input("Enter password: ")
     auth = pwd.encode()
     auth_hash = hashlib.md5(auth).hexdigest()
     with open("credentials.txt", "r") as f:
         stored_email, stored_pwd = f.read().split("\n")
     f.close()
-    if email == stored_email and auth_hash == stored_pwd:
+    if email == stored_email and auth_hash == stored_pwd and is_valid:
          print("Logged in Successfully!")
     else:
         print("Login failed! \n")

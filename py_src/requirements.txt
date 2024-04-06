@@ -13,3 +13,4 @@ py-cpuinfo==9.0.0
 SQLAlchemy==2.0.29
 typing_extensions==4.11.0
 Werkzeug==3.0.2
+validate_email==1.3
