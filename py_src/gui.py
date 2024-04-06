@@ -1,9 +1,11 @@
+
 import customtkinter as ctk 
 import tkinter.messagebox as tkmb 
 from validate_email import validate_email
 import class_info
 from database import store_username, store_hash
-from web3 import Web3
+
+
   
 
 member = class_info.info()
@@ -14,7 +16,9 @@ ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue") 
   
 app = ctk.CTk() 
+
 app.geometry("400x500") 
+
 app.title("Modern Login UI using Customtkinter") 
 my_entries = []
 
@@ -27,11 +31,9 @@ def signup():
     new_window.title("Successfully made account") 
   
     new_window.geometry("350x150") 
-    member.get_all_information()
-    member.parse_all_information()
+
     if is_valid and user_pass.get() == user_pass_rep.get(): 
-        ctk.CTkLabel(new_window,text="YOU JUST LOST THE GAME!!").pack() 
-        Web3.solidity_keccak(['string'], [str(member.hash_string_gen())]).hex()
+        ctk.CTkLabel(new_window,text="YOU JUST LOST THE GAME!!").pack()         
         member.set_pw_hash(user_pass.get())
         
         member.hash_string_gen()
@@ -54,8 +56,8 @@ def login():
     new_window.title("Successfully Logged In") 
 
     new_window.geometry("350x150") 
-    member.get_all_information()
-    member.parse_all_information()
+
+
     is_valid = validate_email(user_entry.get())
 
     if user_entry.get() == username and user_pass.get() == password: 
