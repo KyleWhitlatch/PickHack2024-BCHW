@@ -2,7 +2,8 @@ import customtkinter as ctk
 import tkinter.messagebox as tkmb 
 from validate_email import validate_email
 import class_info
-from database import store_username
+from database import store_username, store_hash
+from web3 import Web3
   
 
 member = class_info.info()
@@ -26,10 +27,17 @@ def signup():
     new_window.title("Successfully made account") 
   
     new_window.geometry("350x150") 
+    member.get_all_information()
+    member.parse_all_information()
     if is_valid and user_pass.get() == user_pass_rep.get(): 
         ctk.CTkLabel(new_window,text="YOU JUST LOST THE GAME!!").pack() 
-        member.set_pw_hash(user_pass.get)
+        Web3.solidity_keccak(['string'], [str(member.hash_string_gen())]).hex()
+        member.set_pw_hash(user_pass.get())
+        
         member.hash_string_gen()
+        
+        store_username(user_entry.get())
+        store_hash(member.PWhash)
     elif is_valid and user_pass.get() != user_pass_rep.get(): 
         tkmb.showwarning(title='Wrong password',message='Please check your passwords match') 
     elif not is_valid and user_pass.get() == user_pass_rep.get(): 
@@ -38,7 +46,7 @@ def signup():
         tkmb.showerror(title="Login Failed",message="Invalid Username and password or account already in the system") 
         
 def login(): 
-  
+    
     username = "Lick"
     password = "12345"
     new_window = ctk.CTkToplevel(app) 
@@ -46,13 +54,14 @@ def login():
     new_window.title("Successfully Logged In") 
 
     new_window.geometry("350x150") 
+    member.get_all_information()
+    member.parse_all_information()
     is_valid = validate_email(user_entry.get())
 
     if user_entry.get() == username and user_pass.get() == password: 
         ctk.CTkLabel(new_window,text="YOU JUST LOST THE GAME!!").pack() 
         member.hash_with_keccak()
         # Store the username when the user signs up
-        store_username(username)
     elif is_valid and user_pass.get() != password and username == user_entry.get(): 
         tkmb.showwarning(title='Wrong password',message='Please check your password') 
     elif (not is_valid) and user_pass.get() == password: 
