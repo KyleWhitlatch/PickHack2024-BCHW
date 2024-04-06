@@ -18,6 +18,7 @@ The client will then display the response to the user.
 import psutil
 import cpuinfo
 import subprocess
+import class_info
 
 ############################################################################################################
 
@@ -95,201 +96,56 @@ full_motherboard_information = []
 
 ############################################################################################################
 
-## WORKS
-# Get CPU information
-cpu_info = cpuinfo.get_cpu_info()
-cpu_percent = psutil.cpu_percent(interval=1)
+system = class_info.info()
 
-def get_cpu_information(cpu_vars):
-    for var in cpu_vars:
-        full_cpu_information.append(subprocess.check_output(['wmic', 'cpu', 'get', var]).decode())
+system.get_all_information()
+system.parse_all_information()
+system.print_all_information()
 
-def parse_cpu_information(full_cpu_information):
-    i = 0
-    while i < len(full_cpu_information):
-        info = full_cpu_information[i].split('\n')[1].strip()
-        if info:
-            full_cpu_information[i] = info
-            i += 1
-        else:
-            del full_cpu_information[i]
-            del cpu_vars[i]
+############################################################################################################
 
-def print_full_cpu_information(full_cpu_information):
-    for i in range(len(full_cpu_information)):
-        print(f"{cpu_vars[i]}: {full_cpu_information[i]}")
+# print("System Information: ")
+# print("=====================================")
 
+# print("cpu_info: ")
 
 # get_cpu_information(cpu_vars)
 # parse_cpu_information(full_cpu_information)
 # print_full_cpu_information(full_cpu_information)
 
-############################################################################################################
+# print()
+# print("=====================================")
 
-## WORKS
-# Get memory information
-memory_info = psutil.virtual_memory()
+# print("memory_info: ")
 
-# Get RAM information
-def get_ram_information(ram_vars):
-    for var in ram_vars:
-        full_ram_information.append(subprocess.check_output(['wmic', 'COMPUTERSYSTEM', 'get', var]).decode())
-    
-def parse_ram_information(full_ram_information):
-    i = 0
-    while i < len(full_ram_information):
-        info = full_ram_information[i].split('\n')[1].strip()
-        if info:
-            full_ram_information[i] = info
-            i += 1
-        else:
-            del full_ram_information[i]
-            del ram_vars[i]
-
-def print_full_ram_information(full_ram_information):
-    for i in range(len(full_ram_information)):
-        print(f"{ram_vars[i]}: {full_ram_information[i]}")
-        
 # get_ram_information(ram_vars)
 # parse_ram_information(full_ram_information)
 # print_full_ram_information(full_ram_information)
 
-############################################################################################################
+# print()
+# print("=====================================")
 
-## WORKS
-# Get disk information
-disk_usage = psutil.disk_usage('/')
-
-def get_disk_information(disk_vars):
-    for var in disk_vars:
-        full_disk_information.append(subprocess.check_output(['wmic', 'diskdrive', 'get', var]).decode())
-        
-def parse_disk_information(full_disk_information):
-    i= 0
-    while i < len(full_disk_information):
-        info = full_disk_information[i].split('\n')[1].strip()
-        if info:
-            full_disk_information[i] = info
-            i += 1
-        else:
-            del full_disk_information[i]
-            del disk_vars[i]
-
-def print_full_disk_information(full_disk_information):
-    for i in range(len(full_disk_information)):
-        print(f"{disk_vars[i]}: {full_disk_information[i]}")
+# print("disk_usage: ")
 
 # get_disk_information(disk_vars)
 # parse_disk_information(full_disk_information)
 # print_full_disk_information(full_disk_information)
 
-############################################################################################################
+# print()
+# print("=====================================")
 
-## WORKS
-# Get network information
-network_info = psutil.net_io_counters()
-
-# network_information_test = subprocess.check_output(['wmic', 'nic', 'get']).decode()
-# print(network_information_test)
-
-def get_network_information(network_vars):
-    for var in network_vars:
-        full_network_information.append(subprocess.check_output(['wmic', 'nic', 'get', var]).decode())
-
-def parse_network_information(full_network_information):
-    i = 0
-    while i < len(full_network_information):
-        info = full_network_information[i].split('\n')[1].strip()
-        if info:
-            full_network_information[i] = info
-            i += 1
-        else:
-            del full_network_information[i]
-            del network_vars[i]
-
-def print_full_network_information(full_network_information):
-    for i in range(len(full_network_information)):
-        print(f"{network_vars[i]}: {full_network_information[i]}")
+# print("network_info: ")
 
 # get_network_information(network_vars)
 # parse_network_information(full_network_information)
 # print_full_network_information(full_network_information)
 
-############################################################################################################
+# print()
+# print("=====================================")
 
-## WORKS
-# Get Motherboard information
+# print("motherboard_info: ")
 
-# motherboard_info = subprocess.check_output(['wmic', 'baseboard', 'get']).decode()
-# print(motherboard_info)
-
-def get_motherboard_information(motherboard_vars):
-    for var in motherboard_vars:
-        full_motherboard_information.append(subprocess.check_output(['wmic', 'baseboard', 'get', var]).decode())
-
-def parse_motherboard_information(full_motherboard_information):
-    i = 0
-    while i < len(full_motherboard_information):
-        info = full_motherboard_information[i].split('\n')[1].strip()
-        if info:
-            full_motherboard_information[i] = info
-            i += 1
-        else:
-            del full_motherboard_information[i]
-            del motherboard_vars[i]
-
-def print_full_motherboard_information(full_motherboard_information):
-    for i in range(len(full_motherboard_information)):
-        print(f"{motherboard_vars[i]}: {full_motherboard_information[i]}")
-        
 # get_motherboard_information(motherboard_vars)
 # parse_motherboard_information(full_motherboard_information)
 # print_full_motherboard_information(full_motherboard_information)
-
-############################################################################################################
-
-print("System Information: ")
-print("=====================================")
-
-print("cpu_info: ")
-
-get_cpu_information(cpu_vars)
-parse_cpu_information(full_cpu_information)
-print_full_cpu_information(full_cpu_information)
-
-print()
-print("=====================================")
-
-print("memory_info: ")
-
-get_ram_information(ram_vars)
-parse_ram_information(full_ram_information)
-print_full_ram_information(full_ram_information)
-
-print()
-print("=====================================")
-
-print("disk_usage: ")
-
-get_disk_information(disk_vars)
-parse_disk_information(full_disk_information)
-print_full_disk_information(full_disk_information)
-
-print()
-print("=====================================")
-
-print("network_info: ")
-
-get_network_information(network_vars)
-parse_network_information(full_network_information)
-print_full_network_information(full_network_information)
-
-print()
-print("=====================================")
-
-print("motherboard_info: ")
-
-get_motherboard_information(motherboard_vars)
-parse_motherboard_information(full_motherboard_information)
-print_full_motherboard_information(full_motherboard_information)
-print("=====================================")
+# print("=====================================")
