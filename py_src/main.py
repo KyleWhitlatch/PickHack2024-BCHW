@@ -7,8 +7,8 @@ import subprocess
 import hashlib
 from web3 import Web3
 import class_info
-
-
+from database import store_hash
+import gui
 
 system = class_info.info()
 
@@ -22,6 +22,7 @@ system.get_using_vars()
 system.parse_using_vars()
 system.print_using_vars()
 # print(system.hash_string_gen())
+store_hash(system.hash_with_keccak())
 print(system.hash_with_keccak())
    
 ############################################################################################################

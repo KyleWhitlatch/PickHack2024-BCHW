@@ -252,10 +252,3 @@ class info:
     def hash_with_keccak(self):
         return Web3.solidity_keccak(['string'], [str(self.hash_string_gen())]).hex()
     
-    def hash_cpu_information(self):
-        cpu_info_string = ' '.join(self.full_cpu_information)
-        return self.hash_with_keccak(cpu_info_string)
-    
-    def compute_hash(self):
-        pass
-            
