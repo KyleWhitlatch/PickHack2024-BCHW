@@ -1,5 +1,6 @@
 import customtkinter as ctk 
 import tkinter.messagebox as tkmb 
+from validate_email import validate_email
   
   
 # Selecting GUI theme - dark, light , system (for system default) 
@@ -11,29 +12,46 @@ ctk.set_default_color_theme("blue")
 app = ctk.CTk() 
 app.geometry("400x500") 
 app.title("Modern Login UI using Customtkinter") 
+my_entries = []
+
+
 
 def signup():
-  return
+    is_valid = user_entry.get()
+    new_window = ctk.CTkToplevel(app) 
+  
+    new_window.title("Successfully made account") 
+  
+    new_window.geometry("350x150") 
+    if is_valid and user_pass.get() == user_pass_rep.get(): 
+        ctk.CTkLabel(new_window,text="YOU JUST LOST THE GAME!!").pack() 
+    elif is_valid and user_pass.get() != user_pass_rep.get(): 
+        tkmb.showwarning(title='Wrong password',message='Please check your passwords match') 
+    elif not is_valid and user_pass.get() == user_pass_rep.get(): 
+        tkmb.showwarning(title='Wrong username',message='Please check your username and make sure it is a valid email') 
+    else: 
+        tkmb.showerror(title="Login Failed",message="Invalid Username and password or account already in the system") 
+        
 def login(): 
   
     username = "Geeks"
     password = "12345"
     new_window = ctk.CTkToplevel(app) 
   
-    new_window.title("New Window") 
+    new_window.title("Successfully Logged In") 
   
     new_window.geometry("350x150") 
+    is_valid = validate_email(user_entry.get())
   
     if user_entry.get() == username and user_pass.get() == password: 
-        tkmb.showinfo(title="Login Successful",message="You have logged in Successfully") 
-        ctk.CTkLabel(new_window,text="GeeksforGeeks is best for learning ANYTHING !!").pack() 
-    elif user_entry.get() == username and user_pass.get() != password: 
+        
+        ctk.CTkLabel(new_window,text="YOU JUST LOST THE GAME!!").pack() 
+    elif is_valid and user_pass.get() != password: 
         tkmb.showwarning(title='Wrong password',message='Please check your password') 
-    elif user_entry.get() != username and user_pass.get() == password: 
+    elif (not is_valid) and user_pass.get() == password: 
         tkmb.showwarning(title='Wrong username',message='Please check your username') 
     else: 
         tkmb.showerror(title="Login Failed",message="Invalid Username and password") 
-  
   
   
 label = ctk.CTkLabel(app,text="This is the main UI page") 
@@ -53,12 +71,14 @@ user_entry.pack(pady=12,padx=10)
   
 user_pass= ctk.CTkEntry(master=frame,placeholder_text="Password",show="*") 
 user_pass.pack(pady=12,padx=10) 
-  
+
+user_pass_rep= ctk.CTkEntry(master=frame,placeholder_text="Re-Enter Password",show="*") 
+user_pass_rep.pack(pady=12,padx=10)
   
 button = ctk.CTkButton(master=frame,text='Login',command=login) 
 button.pack(pady=12,padx=10) 
 
-button = ctk.CTkButton(master=frame,text='Signup',command=signup) 
+button = ctk.CTkButton(master=frame,text='Signup',command=signup)
 button.pack(pady=12,padx=10) 
   
 checkbox = ctk.CTkCheckBox(master=frame,text='Remember Me') 
