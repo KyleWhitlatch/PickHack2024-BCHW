@@ -29,14 +29,13 @@ import subprocess
 # Manufacturer: This indicates the manufacturer of the processor and won't change.
 # Name: This indicates the name of the processor and won't change.
 # NumberOfCores: This indicates the number of cores in the processor and won't change unless the hardware is physically modified.
-# NumberOfEnabledCore: This indicates the number of enabled cores in the processor and won't change unless the hardware is physically modified.
 # NumberOfLogicalProcessors: This indicates the number of logical processors and won't change unless the hardware is physically modified.
 # ProcessorId: This is a unique identifier for the processor.
 # SocketDesignation: This indicates the socket or slot where the processor is installed and won't change unless the hardware is physically modified.
 # SystemName: This is the name of the computer system and won't change unless it's manually changed by the user.
 
 full_cpu_vars = ['AddressWidth', 'Architecture', 'AssetTag', 'Availability', 'Caption', 'Characteristics', 'ConfigManagerErrorCode', 'ConfigManagerUserConfig', 'CpuStatus', 'CreationClassName', 'CurrentClockSpeed', 'CurrentVoltage', 'DataWidth', 'Description', 'DeviceID', 'ErrorCleared', 'ErrorDescription', 'ExtClock', 'Family', 'InstallDate', 'L2CacheSize', 'L2CacheSpeed', 'L3CacheSize', 'L3CacheSpeed', 'LastErrorCode', 'Level', 'LoadPercentage', 'Manufacturer', 'MaxClockSpeed', 'Name', 'NumberOfCores', 'NumberOfEnabledCore', 'NumberOfLogicalProcessors', 'OtherFamilyDescription', 'PartNumber', 'PNPDeviceID', 'PowerManagementCapabilities', 'PowerManagementSupported', 'ProcessorId', 'ProcessorType', 'Revision', 'Role', 'SecondLevelAddressTranslationExtensions', 'SerialNumber', 'SocketDesignation', 'Status', 'StatusInfo', 'Stepping', 'SystemCreationClassName', 'SystemName', 'ThreadCount', 'UniqueId', 'UpgradeMethod', 'Version', 'VirtualizationFirmwareEnabled', 'VMMonitorModeExtensions', 'VoltageCaps']
-cpu_vars = ['DeviceID', 'L2CacheSize', 'L3CacheSize', 'Manufacturer', 'Name', 'NumberOfCores', 'NumberOfEnabledCore', 'NumberOfLogicalProcessors', 'ProcessorId', 'SocketDesignation', 'SystemName']
+cpu_vars = ['DeviceID', 'L2CacheSize', 'L3CacheSize', 'Manufacturer', 'Name', 'NumberOfCores', 'NumberOfLogicalProcessors', 'ProcessorId', 'SocketDesignation', 'SystemName']
 full_cpu_information = []
 
 # Memory variables list
@@ -46,13 +45,11 @@ full_cpu_information = []
 # Name: This is the name of the computer system and won't change unless it's manually changed by the user.
 # NumberOfLogicalProcessors: This indicates the number of logical processors and won't change unless the hardware is physically modified.
 # NumberOfProcessors: This indicates the number of processors and won't change unless the hardware is physically modified.
-# SystemFamily: This indicates the family of the system and won't change.
-# SystemSKUNumber: This is a unique identifier for the system and won't change.
 # SystemType: This indicates the type of system and won't change.
 # TotalPhysicalMemory: This indicates the total physical memory and won't change unless the hardware is physically modified.
 
 full_ram_vars = ['AdminPasswordStatus', 'AutomaticManagedPagefile', 'AutomaticResetBootOption', 'AutomaticResetCapability', 'BootOptionOnLimit', 'BootOptionOnWatchDog', 'BootROMSupported', 'BootStatus', 'BootupState', 'Caption', 'ChassisBootupState', 'ChassisSKUNumber', 'CreationClassName', 'CurrentTimeZone', 'DaylightInEffect', 'Description', 'DNSHostName', 'Domain', 'DomainRole', 'EnableDaylightSavingsTime', 'FrontPanelResetStatus', 'HypervisorPresent', 'InfraredSupported', 'InitialLoadInfo', 'InstallDate', 'KeyboardPasswordStatus', 'LastLoadInfo', 'Manufacturer', 'Model', 'Name', 'NameFormat', 'NetworkServerModeEnabled', 'NumberOfLogicalProcessors', 'NumberOfProcessors', 'OEMLogoBitmap', 'OEMStringArray', 'PartOfDomain', 'PauseAfterReset', 'PCSystemType', 'PCSystemTypeEx', 'PowerManagementCapabilities', 'PowerManagementSupported', 'PowerOnPasswordStatus', 'PowerState', 'PowerSupplyState', 'PrimaryOwnerContact', 'PrimaryOwnerName', 'ResetCapability', 'ResetCount', 'ResetLimit', 'Roles', 'Status', 'SupportContactDescription', 'SystemFamily', 'SystemSKUNumber', 'SystemStartupDelay', 'SystemStartupOptions', 'SystemStartupSetting', 'SystemType', 'ThermalState', 'TotalPhysicalMemory', 'UserName', 'WakeUpType', 'Workgroup']
-ram_vars = ['Manufacturer', 'Model', 'Name', 'NumberOfLogicalProcessors', 'NumberOfProcessors', 'SystemFamily', 'SystemSKUNumber', 'SystemType', 'TotalPhysicalMemory']
+ram_vars = ['Manufacturer', 'Model', 'Name', 'NumberOfLogicalProcessors', 'NumberOfProcessors', 'SystemType', 'TotalPhysicalMemory']
 full_ram_information = []
 
 # Disk variables list
