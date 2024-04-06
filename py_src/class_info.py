@@ -1,7 +1,7 @@
 import psutil
 import cpuinfo
 import subprocess
-
+import hashlib
 
 class info:
     def __init__(self):
@@ -22,6 +22,8 @@ class info:
         self.full_motherboard_information = []
         
     ############################################################################################################
+    
+    ### CPU Information ###
 
     def get_cpu_information(self):
         for var in self.cpu_vars:
@@ -44,6 +46,8 @@ class info:
 
     ############################################################################################################
     
+    ### RAM Information ###
+    
     def get_ram_information(self):
         for var in self.ram_vars:
             self.full_ram_information.append(subprocess.check_output(['wmic', 'COMPUTERSYSTEM', 'get', var]).decode())
@@ -64,6 +68,8 @@ class info:
             print(f"{self.ram_vars[i]}: {self.full_ram_information[i]}")
             
     ############################################################################################################
+    
+    ### Disk Information ###
 
     def get_disk_information(self):
         for var in self.disk_vars:
@@ -86,6 +92,8 @@ class info:
 
     ############################################################################################################
     
+    ### Network Information ###
+    
     def get_network_information(self):
         for var in self.network_vars:
             self.full_network_information.append(subprocess.check_output(['wmic', 'nic', 'get', var]).decode())
@@ -107,6 +115,8 @@ class info:
             
     ############################################################################################################
     
+    ### Motherboard Information ###
+    
     def get_motherboard_information(self):
         for var in self.motherboard_vars:
             self.full_motherboard_information.append(subprocess.check_output(['wmic', 'baseboard', 'get', var]).decode())
@@ -127,6 +137,8 @@ class info:
             print(f"{self.motherboard_vars[i]}: {self.full_motherboard_information[i]}")
             
     ############################################################################################################
+    
+    ### Get All Information ###
     
     def get_all_information(self):
         self.get_cpu_information()
@@ -177,4 +189,9 @@ class info:
         print("=====================================")
     
     ############################################################################################################
+    
+    ### COMPUTE HASH ###
+    
+    def compute_hash(self):
+        pass
             
