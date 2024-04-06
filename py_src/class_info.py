@@ -36,6 +36,8 @@ class info:
         self.using_vars = ['L2CacheSize', 'ProcessorId', 'NumberOfLogicalProcessors', 'TotalPhysicalMemory', 'SerialNumber', 'Size']
         self.full_using_vars = []
         
+        self.PWhash = "12345"
+        
     ############################################################################################################
     
     ### CPU Information ###
@@ -237,6 +239,7 @@ class info:
     
     ### COMPUTE HASH ###
     def hash_string_gen(self):
+        self.full_using_vars.append(self.PWhash)
         hash_str = "".join(x for x in self.full_using_vars)
         hash_str = hash_str.replace('_', '')
         hash_str = hash_str.replace('.', '')
