@@ -14,7 +14,11 @@ users = {
 # To render a login form 
 @app.route('/')
 def view_form():
+<<<<<<< Updated upstream
     return render_template("login.html")
+=======
+    return render_template("page.html")
+>>>>>>> Stashed changes
  
 # For handling get request form we can get
 # the form inputs value by using args attribute.
@@ -33,7 +37,7 @@ def handle_get():
         else:
             return '<h1>invalid credentials!</h1>'
     else:
-        return render_template('login.html')
+        return render_template("page.html")
  
 # For handling post request form we can get the form
 # inputs value by using POST attribute.
@@ -49,7 +53,7 @@ def handle_post():
         else:
             return '<h1>invalid credentials!</h1>'
     else:
-        return render_template('login.html')
+        return render_template("page.html")
  
 if __name__ == '__main__':
     app.run()
