@@ -3,7 +3,7 @@ import customtkinter as ctk
 import tkinter.messagebox as tkmb 
 from validate_email import validate_email
 import class_info
-from database import store_username, store_hash
+import database 
 
 
   
@@ -33,11 +33,10 @@ def signup():
     if is_valid and user_pass.get() == user_pass_rep.get(): 
         ctk.CTkLabel(new_window,text="YOU JUST LOST THE GAME!!").pack()         
         member.set_pw_hash(user_pass.get())
-        
         member.hash_string_gen()
         
-        store_username(user_entry.get())
-        store_hash(member.PWhash)
+        database.store_username(user_entry.get())
+        database.store_hash(member.PWhash)
     elif is_valid and user_pass.get() != user_pass_rep.get(): 
         tkmb.showwarning(title='Wrong password',message='Please check your passwords match') 
     elif not is_valid and user_pass.get() == user_pass_rep.get(): 
@@ -54,7 +53,6 @@ def login():
     new_window.title("Successfully Logged In") 
 
     new_window.geometry("350x150") 
-
 
     is_valid = validate_email(user_entry.get())
 
