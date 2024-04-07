@@ -33,7 +33,6 @@ def signup():
     if is_valid and user_pass.get() == user_pass_rep.get(): 
         ctk.CTkLabel(new_window,text="YOU JUST LOST THE GAME!!").pack()         
         member.set_pw_hash(user_pass.get())
-        
         member.hash_string_gen()
         with database as db:
             db.store_useraddr
@@ -53,7 +52,6 @@ def login():
     new_window.title("Successfully Logged In") 
 
     new_window.geometry("350x150") 
-
 
     is_valid = validate_email(user_entry.get())
 
