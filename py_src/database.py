@@ -12,11 +12,8 @@ class db:
         self.con.commit()
     
     def query_for_sc(self, user):
-        res = self.cur.execute(f'SELECT addr FROM users WHERE username=\'{str(user)}\'')
-        if res.fetchall() is None:
-            return 404
-        else:
-            return res.fetchone()[0]
+        res = self.cur.execute(f'SELECT sc_address FROM users WHERE username=\'{str(user)}\'')
+        return res.fetchone()
         
             
         

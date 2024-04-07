@@ -6,7 +6,7 @@ contract transact{
 
     bytes32 hash_comp;
 
-    constructor(string memory str_to_hash) {
+    constructor(bytes32 str_to_hash) {
         hash_comp = keccak256(abi.encodePacked(str_to_hash));
     }
 

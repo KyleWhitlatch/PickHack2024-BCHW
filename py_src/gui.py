@@ -25,8 +25,7 @@ def signup():
         member.set_pw_hash(str(user_pass.get()))
         hash_str = member.hash_string_gen()
         data = {'username': ''+str(user_entry.get()), 'hash_str': ''+str(hash_str)}
-
-        #print(member.PWhash)
+        print("signup: " + str(data))
         response = requests.post('http://127.0.0.1:5000/signup', json=data)
         print(response.status_code)
         print('Response body:', response.text)
@@ -51,36 +50,26 @@ def signup():
         
 def login(): 
     
-    # Get the username and password from the GUI
+    # Get the username and password from the GUIs
     username = user_entry.get()
     password = user_pass.get()
-    new_window = ctk.CTkToplevel(app) 
-
-    new_window.title("Successfully Logged In") 
-
-    new_window.geometry("350x150") 
-    member.set_pw_hash(user_pass.get())
-    # Send a POST request to the Flask application with the username and password
-    is_valid = validate_email(user_entry.get())
-    headers = {'Content-Type': 'application/json'}
-    if user_entry.get() == username and user_pass.get() == password: 
-        ctk.CTkLabel(new_window,text="YOU JUST LOST THE GAME!!").pack() 
-        member.hash_with_keccak()
-        data = {'username': username, 'password': password}
-        response = requests.post('http://127.0.0.1:5000', data=json.dumps(data),headers = headers)
-    
+    member.set_pw_hash(password)
+    hash_str = member.hash_with_keccak()
+    data = {'username': ''+str(user_entry.get()), 'hash_str': ''+str(hash_str)}
+    print("loginL " + str(data))
+    response = requests.post('http://127.0.0.1:5000/login', json=data)
+    print(response.status_code)
+    print('Response body:', response.text)
     # Check the response
-        if response.status_code == 200:
-            tkmb.showwarning(title='correct password and system',message='correct password and system!!')
-        else:
-            tkmb.showwarning(title='Wrong password or wrong system',message='wrong system or password')
-        # Store the username when the user signs up
-    elif is_valid and user_pass.get() != password and username == user_entry.get(): 
-        tkmb.showwarning(title='Wrong password',message='Please check your password') 
-    elif (not is_valid) and user_pass.get() == password: 
-        tkmb.showwarning(title='Wrong username',message='Please check your username') 
-    else: 
-        tkmb.showerror(title="Login Failed",message="Invalid Username and password") 
+    if response.status_code == 200:
+        new_window = ctk.CTkToplevel(app) 
+        ctk.CTkLabel(new_window,text="YOU JUST LOST THE GAME!!").pack()
+        new_window.title("Successfully Logged In") 
+        new_window.geometry("350x150") 
+        tkmb.showwarning(title='correct password and system',message='correct password and system!!')
+    else:
+        tkmb.showwarning(title='Wrong password or wrong system',message='wrong system or password')
+        
   
   
 label = ctk.CTkLabel(app,text="This is the main UI page") 

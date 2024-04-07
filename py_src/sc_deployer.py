@@ -31,13 +31,16 @@ class sc_deployer:
         self.cont_abi = self.artifact_contract['contracts']['transact.sol']['transact']['abi']
     def deploy(self, str_to_hash):
         cont = self.w3.eth.contract(abi=self.cont_abi, bytecode= self.cont_bytecode)
-        tx_hash = cont.constructor(str_to_hash).transact({'from': self.eth_acct})
+        tx_hash = cont.constructor(Web3.to_bytes(hexstr=str_to_hash)).transact({'from': self.eth_acct})
         tx_receipt = self.w3.eth.wait_for_transaction_receipt(tx_hash)
         print("Contract Address: {}, type of address {}: ".format(tx_receipt.contractAddress, type(tx_receipt.contractAddress)))
+        print("Stored Hash: " + str(self.w3.eth.contract(address=Web3.to_checksum_address(tx_receipt.contractAddress), abi=self.cont_abi).functions.gethash().call()))
         return str(tx_receipt.contractAddress)
     
     def call_checker(self, addr, hash):
         cont = self.w3.eth.contract(address=Web3.to_checksum_address(addr.lower()), abi=self.cont_abi)
+        stored_hash = cont.functions.gethash().call()
+        print("STORED HASH" + str(stored_hash))
         return cont.functions.compareHash(Web3.to_bytes(hexstr=hash)).call()
     
 

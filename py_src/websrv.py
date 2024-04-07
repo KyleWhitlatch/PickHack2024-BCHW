@@ -15,14 +15,18 @@ def view_form():
 @app.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
-    password = data['password'] 
+    hash_str = data['hash_str'] 
     username = data['username']
     addr = dat.query_for_sc(username)
-    if addr != 404:
-        if bc.call_checker(addr):
+    print(addr)
+    print(addr[0])
+    if addr is not None:
+        if bc.call_checker(addr[0], hash_str):
             return "OK", 200
+        else:
+            return "FORBIDDEN -- BC FAILED", 403
     else:
-        return render_template('page.html')
+        return "FORBIDDEN -- DB FAILED", 403
 
 
 @app.route('/signup', methods=['POST'])
