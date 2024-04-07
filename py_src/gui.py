@@ -31,13 +31,14 @@ def signup():
         print('Response body:', response.text)
         if response.status_code == 200:
             new_window = ctk.CTkToplevel(app) 
-  
+
             new_window.title("Successfully made account") 
   
             new_window.geometry("350x150") 
             ctk.CTkLabel(new_window,text="YOU JUST LOST THE GAME!!").pack() 
             
             tkmb.showwarning(title='sign up successful',message='sign up successful!!')
+            app.destroy()
         else:
             tkmb.showwarning(title='Wrong password or wrong system',message='wrong system or password')
             
@@ -53,7 +54,7 @@ def login():
     # Get the username and password from the GUIs
     username = user_entry.get()
     password = user_pass.get()
-    member.set_pw_hash(password)
+    member.set_pw_hash(str(password))
     hash_str = member.hash_with_keccak()
     data = {'username': ''+str(user_entry.get()), 'hash_str': ''+str(hash_str)}
     print("loginL " + str(data))
