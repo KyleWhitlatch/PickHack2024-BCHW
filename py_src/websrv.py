@@ -14,7 +14,7 @@ users = {
 # To render a login form 
 @app.route('/')
 def view_form():
-    return render_template('login.html')
+    return render_template("login.html")
  
 # For handling get request form we can get
 # the form inputs value by using args attribute.
