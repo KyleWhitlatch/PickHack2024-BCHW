@@ -14,11 +14,7 @@ users = {
 # To render a login form 
 @app.route('/')
 def view_form():
-<<<<<<< Updated upstream
-    return render_template("login.html")
-=======
     return render_template("page.html")
->>>>>>> Stashed changes
  
 # For handling get request form we can get
 # the form inputs value by using args attribute.
