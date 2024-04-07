@@ -16,14 +16,12 @@ class testmongo:
         
     # Retrieve the username and smart contract address from the database
     def retrieve_userpass(self, username):
-        user = self.users.find_one({'username': username})
+        user = self.users.find({'username': username})
         return user
     
     def retrieve_username(self, username):
-        if username in self.users:
-            return True
-        else:
-            return False
+        user = self.users.find({'username': username})
+        return user
         
 # Test the database functions
 # test = testmongo()

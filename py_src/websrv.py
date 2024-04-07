@@ -12,7 +12,7 @@ users = {
     'kunal': '1234',
     'user2': 'password2'
 }
- 
+dat = database.testmongo()
 # To render a login form 
 @app.route('/')
 def view_form():
@@ -24,60 +24,30 @@ def view_form():
 # e.g http://127.0.0.1:5000/handle_get?username=kunal&password=1234
 # this exploits our credentials so that's 
 # why developers prefer POST request.
-@app.route('/handle_get', methods=['GET'])
-def handle_get():
-    if request.method == 'GET':
-        username = request.args['username']
-        password = request.args['password']
-        print(username, password)
-        if username in users and users[username] == password:
-            return '<h1>Welcome!!!</h1>'
-        else:
-            return '<h1>invalid credentials!</h1>'
-    else:
-        return render_template('page.html')
- 
-# For handling post request form we can get the form
-# inputs value by using POST attribute.
-# this values after submitting you will never see in the urls.
-@app.route('/handle_post', methods=['POST'])
-def handle_post():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        print(username, password)
-        if username in users and users[username] == password:
-            return '<h1>Welcome!!!</h1>'
-        else:
-            return '<h1>invalid credentials!</h1>'
-    else:
-        return render_template('page.html')
     
 
 @app.route('/login', methods=['POST'])
-def login_check(username, password):
+def login():
     data = request.get_json()
     password = data['password'] 
     username = data['username']
-    user_pass = database.retrieve_username(username)
-    if user_pass and database.retrieve_userpass(username) != None:
-        
-        if True: # need to check if password matches the blockchain hash
-            return 200
+    user_name = dat.retrieve_username(username)
+    if user_name != None  and dat.retrieve_userpass(username) != None:
+        for i in user_name:
+            #if i[password] == password:
+            #return '', 200
+            continue
     else:
-        return '<h1>invalid credentials!</h1>' and render_template('page.html')
+        return render_template('page.html')
 
 
 @app.route('/signup', methods=['POST'])
-def signup_check(username, password):
-    data = request.get_json()
-    username = data['username']
-    password = data['password']
-    
-    database.store_user(username)
-    #need to store the password here into the smart contract
-    return 200
- 
+def signup():
+    if request.method == 'POST':
+        data = request.get_json()
+        username = data['username']
+        hash_str = data['hash_str']
+        print(username, hash_str)
  
 if __name__ == '__main__':
     app.run()
