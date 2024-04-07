@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% set bg_image = url_for('static', filename='17973908.jpg') %}
+
 <style>
 body,h1,h2,h3,h4,h5,h6,p {
   font-family: "Lato", sans-serif;
@@ -19,7 +21,7 @@ body, html {
 }
 
 body {
-  background-image: url('17973908.jpg');
+  background-image: url('{{ bg_image }}');
 }
 
 /* Create a Parallax Effect */
@@ -116,10 +118,10 @@ body {
   <h3 class="w3-center">ABOUT THE APP</h3>
   <p>We have created a desktop app that you can log into that takes your login information and system specs to make a block on a smart contract to check in the future 
     if you are using the same computer or authenticate on a new device. 
-  </p>
+    </p>
   <div class="w3-row">
     <div class="w3-col m6 w3-center w3-padding-large">
-      <img src="DABABI_MADE_TO_SIZE.png" class="w3-round w3-image w3-opacity w3-hover-opacity-off" alt="Photo of Me" width="500" height="333">
+      <img src="{{ url_for('static', filename='DABABI_MADE_TO_SIZE.png') }}" class="w3-round w3-image w3-opacity w3-hover-opacity-off" alt="Photo of Me" width="500" height="333">
     </div>
 
     <!-- Hide this text on small devices -->

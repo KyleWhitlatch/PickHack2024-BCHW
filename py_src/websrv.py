@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, session
  
 app = Flask(__name__)
+#app = Flask(static_folder='C:\\Users\\ltkli\\Documents\\GitHub\\PickHack2024-BCHW\\py_src\\static')
  
 # Set a secret key for encrypting session data
 app.secret_key = 'my_secret_key'
@@ -14,7 +15,7 @@ users = {
 # To render a login form 
 @app.route('/')
 def view_form():
-    return render_template("page.html")
+    return render_template('page.html')
  
 # For handling get request form we can get
 # the form inputs value by using args attribute.
@@ -33,7 +34,7 @@ def handle_get():
         else:
             return '<h1>invalid credentials!</h1>'
     else:
-        return render_template("page.html")
+        return render_template('page.html')
  
 # For handling post request form we can get the form
 # inputs value by using POST attribute.
@@ -49,7 +50,7 @@ def handle_post():
         else:
             return '<h1>invalid credentials!</h1>'
     else:
-        return render_template("page.html")
+        return render_template('page.html')
  
 if __name__ == '__main__':
     app.run()
