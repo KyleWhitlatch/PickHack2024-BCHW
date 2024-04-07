@@ -239,7 +239,7 @@ class info:
     
     ### Password Hash ###
     def set_pw_hash(self, pw):
-        self.PWhash = pw
+        self.PWhash = Web3.solidity_keccak(pw)
     
     ### COMPUTE HASH ###
     def hash_string_gen(self):
@@ -247,6 +247,7 @@ class info:
         hash_str = "".join(x for x in self.full_using_vars)
         hash_str = hash_str.replace('_', '')
         hash_str = hash_str.replace('.', '')
+        print(hash_str)
         return hash_str
     
     def hash_with_keccak(self):

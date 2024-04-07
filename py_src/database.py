@@ -9,8 +9,8 @@ class testmongo:
         self.posts = self.db.posts
         
     # Store the username and smart contract address in the database
-    def store_userpass(self, username, address):
-        post = {"username": username, "sc_address": address}
+    def store_user(self, username):
+        post = {"username": username}
         id = self.users.insert_one(post).inserted_id
         print(id)
         
@@ -20,7 +20,7 @@ class testmongo:
         return user
         
 # Test the database functions
-test = testmongo()
-test.store_userpass('test_user', 'test_address')
-query = test.retrieve_userpass('test_user')
-print(query['sc_address'])
+# test = testmongo()
+# test.store_userpass('test_user', 'test_address')
+# query = test.retrieve_userpass('test_user')
+# print(query['sc_address'])
