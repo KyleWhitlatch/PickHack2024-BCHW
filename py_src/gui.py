@@ -19,9 +19,7 @@ app.title("Modern Login UI using Customtkinter")
 
 
 def signup():
-    is_valid = validate_email(user_entry.get())
-
-    if is_valid and user_pass.get() == user_pass_rep.get(): 
+    if len(user_entry.get()) > 0 and user_pass.get() == user_pass_rep.get(): 
         # Send a POST request to the Flask application with the new user's information
         headers = {'Content-Type': 'application/json'}
         member.set_pw_hash(str(user_pass.get()))
@@ -44,9 +42,9 @@ def signup():
         else:
             tkmb.showwarning(title='Wrong password or wrong system',message='wrong system or password')
             
-    elif is_valid and user_pass.get() != user_pass_rep.get(): 
+    elif user_pass.get() != user_pass_rep.get(): 
         tkmb.showwarning(title='Wrong password',message='Please check your passwords match') 
-    elif not is_valid and user_pass.get() == user_pass_rep.get(): 
+    elif user_pass.get() == user_pass_rep.get(): 
         tkmb.showwarning(title='Wrong username',message='Please check your username and make sure it is a valid email') 
     else: 
         tkmb.showerror(title="Login Failed",message="Invalid Username and password or account already in the system") 

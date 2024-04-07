@@ -34,13 +34,14 @@ class sc_deployer:
         tx_hash = cont.constructor(str_to_hash).transact({'from': self.eth_acct})
         tx_receipt = self.w3.eth.wait_for_transaction_receipt(tx_hash)
         print("Contract Address: {}, type of address {}: ".format(tx_receipt.contractAddress, type(tx_receipt.contractAddress)))
+        return str(tx_receipt.contractAddress)
     
     def call_checker(self, addr, hash):
         cont = self.w3.eth.contract(address=Web3.to_checksum_address(addr.lower()), abi=self.cont_abi)
         return cont.functions.compareHash(Web3.to_bytes(hexstr=hash)).call()
     
 
-test = sc_deployer()
-test.deploy('32768BFEBFBFF000B06713234087911424002538BA01504BD5100020227328012345')
-print(test.call_checker('0xCb0155352c9ACFc02Ee70f57820bD82b7D222A41', '0xea6a63765d8d80f92dd19d559f6e3a862b3e10733a6ebb089069a39d8df0994e'))
+# test = sc_deployer()
+# test.deploy('32768BFEBFBFF000B06713234087911424002538BA01504BD5100020227328012345')
+# print(test.call_checker('0xCb0155352c9ACFc02Ee70f57820bD82b7D222A41', '0xea6a63765d8d80f92dd19d559f6e3a862b3e10733a6ebb089069a39d8df0994e'))
         

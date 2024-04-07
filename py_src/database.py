@@ -1,27 +1,24 @@
-from pymongo import MongoClient
+import sqlite3
 import json
 
-class testmongo:
+class db:
     def __init__(self):
-        self.client = MongoClient('localhost', 27017)
-        self.db = self.client['login_db']
-        self.users = self.db['users']
-        self.posts = self.db.posts
-        
-    # Store the username and smart contract address in the database
-    def store_user(self, username):
-        post = {"username": username}
-        id = self.users.insert_one(post).inserted_id
-        print(id)
-        
-    # Retrieve the username and smart contract address from the database
-    def retrieve_userpass(self, username):
-        user = self.users.find({'username': username})
-        return user
+        self.con = sqlite3.connect('users.db', check_same_thread=False)
+        self.cur = self.con.cursor()
+        self.cur.execute("CREATE TABLE users(username, sc_address)")
     
-    def retrieve_username(self, username):
-        user = self.users.find({'username': username})
-        return user
+    def insert(self, user, addr):
+        self.cur.execute(f'INSERT INTO users VALUES (\'{str(user)}\',\'{str(addr)}\')')
+        self.con.commit()
+    
+    def query_for_sc(self, user):
+        res = self.cur.execute(f'SELECT addr FROM users WHERE username=\'{str(user)}\'')
+        if res.fetchall() is None:
+            return 404
+        else:
+            return res.fetchone()[0]
+        
+            
         
 # Test the database functions
 # test = testmongo()

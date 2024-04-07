@@ -1,42 +1,26 @@
 from flask import Flask, render_template, request, redirect, session
 import database
+import sc_deployer
  
 app = Flask(__name__)
-#app = Flask(static_folder='C:\\Users\\ltkli\\Documents\\GitHub\\PickHack2024-BCHW\\py_src\\static')
- 
-# Set a secret key for encrypting session data
-app.secret_key = 'my_secret_key'
- 
-# dictionary to store user and password
-users = {
-    'kunal': '1234',
-    'user2': 'password2'
-}
-dat = database.testmongo()
+
+bc = sc_deployer.sc_deployer()
+dat = database.db()
 # To render a login form 
 @app.route('/')
 def view_form():
     return render_template('page.html')
  
-# For handling get request form we can get
-# the form inputs value by using args attribute.
-# this values after submitting you will see in the urls.
-# e.g http://127.0.0.1:5000/handle_get?username=kunal&password=1234
-# this exploits our credentials so that's 
-# why developers prefer POST request.
-    
 
 @app.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
     password = data['password'] 
     username = data['username']
-    user_name = dat.retrieve_username(username)
-    if user_name != None  and dat.retrieve_userpass(username) != None:
-        for i in user_name:
-            #if i[password] == password:
-            #return '', 200
-            continue
+    addr = dat.query_for_sc(username)
+    if addr != 404:
+        if bc.call_checker(addr):
+            return "OK", 200
     else:
         return render_template('page.html')
 
@@ -47,7 +31,10 @@ def signup():
         data = request.get_json()
         username = data['username']
         hash_str = data['hash_str']
+        addr = bc.deploy(hash_str)
+        dat.insert(username, addr)
         print(username, hash_str)
+        return "OK", 200
  
 if __name__ == '__main__':
     app.run()
