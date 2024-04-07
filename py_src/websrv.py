@@ -51,6 +51,30 @@ def handle_post():
             return '<h1>invalid credentials!</h1>'
     else:
         return render_template('page.html')
+    
+    
+@app.route('/login', methods=['GET'],)
+def login(username, password):
+    return render_template('page.html')
+
+@app.route('/login', methods=['POST'])
+def login_check(username, password):
+    if username in users and users[username] == password:
+        return '<h1>Welcome!!!</h1>'
+    else:
+        return '<h1>invalid credentials!</h1>' and render_template('page.html')
+
+@app.route('/signup', methods=['GET'])
+def signup():
+    return render_template('page.html')
+
+@app.route('/signup', methods=['POST'])
+def signup_check(username, password):
+    if username in users and users[username] == password:
+        return '<h1>Welcome!!!</h1>'
+    else:
+        return '<h1>invalid credentials!</h1>' and render_template('page.html') 
+ 
  
 if __name__ == '__main__':
     app.run()

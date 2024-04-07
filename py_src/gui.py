@@ -1,12 +1,10 @@
-
 import customtkinter as ctk 
 import tkinter.messagebox as tkmb 
 from validate_email import validate_email
 import class_info
 import database
-
-
-  
+import requests
+import json
 
 member = class_info.info()
 # Selecting GUI theme - dark, light , system (for system default) 
@@ -20,8 +18,6 @@ app.geometry("400x500")
 app.title("Modern Login UI using Customtkinter") 
 
 
-
-
 def signup():
     is_valid = validate_email(user_entry.get())
     new_window = ctk.CTkToplevel(app) 
@@ -33,9 +29,16 @@ def signup():
     if is_valid and user_pass.get() == user_pass_rep.get(): 
         ctk.CTkLabel(new_window,text="YOU JUST LOST THE GAME!!").pack()         
         member.set_pw_hash(user_pass.get())
-        member.hash_string_gen()
-        with database as db:
-            db.store_useraddr
+        # Send a POST request to the Flask application with the new user's information
+        data = {'username': user_entry.get(), 'password': member.hash_string_gen()}
+        response = requests.post('http://127.0.0.1:5000', data=json.dumps(data))
+
+        # Check the response
+        if response.status_code == 200:
+            print('Signup successful')
+        else:
+            print('Signup failed')
+            
     elif is_valid and user_pass.get() != user_pass_rep.get(): 
         tkmb.showwarning(title='Wrong password',message='Please check your passwords match') 
     elif not is_valid and user_pass.get() == user_pass_rep.get(): 
@@ -45,14 +48,26 @@ def signup():
         
 def login(): 
     
-    username = "Lick"
-    password = "12345"
+    # Get the username and password from the GUI
+    username = user_entry.get()
+    password = user_pass.get()
     new_window = ctk.CTkToplevel(app) 
 
     new_window.title("Successfully Logged In") 
 
     new_window.geometry("350x150") 
-
+    
+    # Send a POST request to the Flask application with the username and password
+    data = {'username': username, 'password': password}
+    response = requests.post('http://127.0.0.1:5000', data=json.dumps(data))
+    
+    # Check the response
+    if response.status_code == 200:
+        print('Login successful')
+    else:
+        print('Login failed')
+        
+    
     is_valid = validate_email(user_entry.get())
 
     if user_entry.get() == username and user_pass.get() == password: 
