@@ -31,7 +31,7 @@ def signup():
         member.set_pw_hash(user_pass.get())
         # Send a POST request to the Flask application with the new user's information
         data = {'username': user_entry.get(), 'password': member.hash_string_gen()}
-        response = requests.post('http://127.0.0.1:5000', data=json.dumps(data))
+        response = requests.post('http://127.0.0.1:5000/signup', data=json.dumps(data))
 
         # Check the response
         if response.status_code == 200:
@@ -56,10 +56,10 @@ def login():
     new_window.title("Successfully Logged In") 
 
     new_window.geometry("350x150") 
-    
+    member.set_pw_hash(user_pass.get())
     # Send a POST request to the Flask application with the username and password
     data = {'username': username, 'password': password}
-    response = requests.post('http://127.0.0.1:5000', data=json.dumps(data))
+    response = requests.post('http://127.0.0.1:5000/login', data=json.dumps(data))
     
     # Check the response
     if response.status_code == 200:
@@ -73,6 +73,14 @@ def login():
     if user_entry.get() == username and user_pass.get() == password: 
         ctk.CTkLabel(new_window,text="YOU JUST LOST THE GAME!!").pack() 
         member.hash_with_keccak()
+        data = {'username': username, 'password': password}
+        response = requests.post('http://127.0.0.1:5000', data=json.dumps(data))
+    
+    # Check the response
+        if response.status_code == 200:
+            print('Login successful')
+        else:
+            print('Login failed')
         # Store the username when the user signs up
     elif is_valid and user_pass.get() != password and username == user_entry.get(): 
         tkmb.showwarning(title='Wrong password',message='Please check your password') 

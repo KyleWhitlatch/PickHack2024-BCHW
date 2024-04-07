@@ -18,6 +18,12 @@ class testmongo:
     def retrieve_userpass(self, username):
         user = self.users.find_one({'username': username})
         return user
+    
+    def retrieve_username(self, username):
+        if username in self.users:
+            return True
+        else:
+            return False
         
 # Test the database functions
 # test = testmongo()

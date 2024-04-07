@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, session
+import database
  
 app = Flask(__name__)
 #app = Flask(static_folder='C:\\Users\\ltkli\\Documents\\GitHub\\PickHack2024-BCHW\\py_src\\static')
@@ -52,28 +53,30 @@ def handle_post():
     else:
         return render_template('page.html')
     
-    
-@app.route('/login', methods=['GET'],)
-def login(username, password):
-    return render_template('page.html')
 
 @app.route('/login', methods=['POST'])
 def login_check(username, password):
-    if username in users and users[username] == password:
-        return '<h1>Welcome!!!</h1>'
+    data = request.get_json()
+    password = data['password'] 
+    username = data['username']
+    user_pass = database.retrieve_username(username)
+    if user_pass and database.retrieve_userpass(username) != None:
+        
+        if True: # need to check if password matches the blockchain hash
+            return 200
     else:
         return '<h1>invalid credentials!</h1>' and render_template('page.html')
 
-@app.route('/signup', methods=['GET'])
-def signup():
-    return render_template('page.html')
 
 @app.route('/signup', methods=['POST'])
 def signup_check(username, password):
-    if username in users and users[username] == password:
-        return '<h1>Welcome!!!</h1>'
-    else:
-        return '<h1>invalid credentials!</h1>' and render_template('page.html') 
+    data = request.get_json()
+    username = data['username']
+    password = data['password']
+    
+    database.store_user(username)
+    #need to store the password here into the smart contract
+    return 200
  
  
 if __name__ == '__main__':
