@@ -1,7 +1,7 @@
-# PickHack2024-BCHW
+# DABABI
 
 APPLICATION FOR BCHW VERIFICATION
-- [PickHack2024-BCHW](#pickhack2024-bchw)
+- [DABABI](#dababi)
 - [Table of Contents](#table-of-contents)
 - [About the application](#about-the-application)
 - [CPU variables list](#cpu-variables-list)
@@ -13,9 +13,9 @@ APPLICATION FOR BCHW VERIFICATION
 
 # Table of Contents
 
-
-
 # About the application
+
+![image](./web_src/DABABI_MADE_TO_SIZE.png)
 
 This part of the application will get the specific system identifiers including but not limited to:
 cpu, memory, disk, network, and other system information. 
