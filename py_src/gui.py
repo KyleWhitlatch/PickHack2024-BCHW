@@ -15,7 +15,7 @@ ctk.set_default_color_theme("blue")
   
 app = ctk.CTk() 
 app.geometry("400x500") 
-app.title("Modern Login UI using Customtkinter") 
+app.title("DABABI LOGIN AUTHENTICATOR") 
 
 
 def signup():
