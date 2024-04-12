@@ -16,7 +16,7 @@ APPLICATION FOR BCHW VERIFICATION
 
 # About the application
 
-![image](./web_src/DABABI_MADE_TO_SIZE.png)
+![image](py_src/static/DABABI_MADE_TO_SIZE.png)
 
 This part of the application will get the specific system identifiers including but not limited to:
 cpu, memory, disk, network, and other system information. 
