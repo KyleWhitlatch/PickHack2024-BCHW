@@ -35,7 +35,7 @@ MarkupSafe==2.1.5
 multidict==6.0.5
 Naked==0.1.32
 parsimonious==0.10.0
-protobuf==5.26.1
+protobuf==5.29.5
 psutil==5.9.8
 py-cpuinfo==9.0.0
 pycryptodome==3.20.0
